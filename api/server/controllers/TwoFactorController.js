@@ -9,7 +9,7 @@ const { updateUser, getUserById } = require('~/models');
 const { logger } = require('~/config');
 const { encryptV3 } = require('~/server/utils/crypto');
 
-const safeAppTitle = (process.env.APP_TITLE || 'LibreChat').replace(/\s+/g, '');
+const safeAppTitle = (process.env.APP_TITLE || 'jh-chat').replace(/\s+/g, '');
 
 /**
  * Enable 2FA for the user by generating a new TOTP secret and backup codes.

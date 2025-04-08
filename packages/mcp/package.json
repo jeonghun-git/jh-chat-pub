@@ -2,7 +2,7 @@
   "name": "librechat-mcp",
   "version": "1.1.0",
   "type": "module",
-  "description": "MCP services for LibreChat",
+  "description": "MCP services for jh-chat",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "./dist/types/index.d.ts",
@@ -28,12 +28,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/danny-avila/LibreChat.git"
+    "url": "git+https://github.com/danny-avila/jh-chat.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/danny-avila/LibreChat/issues"
+    "url": "https://github.com/danny-avila/jh-chat/issues"
   },
   "homepage": "https://librechat.ai",
   "devDependencies": {

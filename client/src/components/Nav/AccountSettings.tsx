@@ -12,6 +12,9 @@ import { useLocalize } from '~/hooks';
 import Settings from './Settings';
 import store from '~/store';
 
+// favicon 이미지 import
+import faviconUrl from '../../../public/assets/favicon.ico';
+
 function AccountSettings() {
   const localize = useLocalize();
   const { user, isAuthenticated, logout } = useAuthContext();
@@ -37,21 +40,39 @@ function AccountSettings() {
             {avatarSeed.length === 0 ? (
               <div
                 style={{
-                  backgroundColor: 'rgb(121, 137, 255)',
-                  width: '32px',
-                  height: '32px',
-                  boxShadow: 'rgba(240, 246, 252, 0.1) 0px 0px 0px 1px',
+                  width: '28px',
+                  height: '28px',
                 }}
-                className="relative flex items-center justify-center rounded-full p-1 text-text-primary"
+                className="relative flex items-center justify-center"
                 aria-hidden="true"
               >
-                <UserIcon />
+                <img src={faviconUrl} alt="User icon" width="100%" height="100%" style={{ objectFit: 'contain' }} />
               </div>
             ) : (
               <img
-                className="rounded-full"
                 src={(user?.avatar ?? '') || avatarSrc}
                 alt={`${user?.name || user?.username || user?.email || ''}'s avatar`}
+                style={{ width: '28px', height: '28px', objectFit: 'contain' }}
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  const parentElement = e.currentTarget.parentElement;
+                  if (parentElement) {
+                    const div = document.createElement('div');
+                    div.style.width = '28px';
+                    div.style.height = '28px';
+                    div.className = 'relative flex items-center justify-center';
+                    
+                    const faviconImg = document.createElement('img');
+                    faviconImg.src = faviconUrl;
+                    faviconImg.alt = 'User icon';
+                    faviconImg.style.width = '100%';
+                    faviconImg.style.height = '100%';
+                    faviconImg.style.objectFit = 'contain';
+                    
+                    div.appendChild(faviconImg);
+                    parentElement.appendChild(div);
+                  }
+                }}
               />
             )}
           </div>
@@ -93,16 +114,6 @@ function AccountSettings() {
           <FileText className="icon-md" aria-hidden="true" />
           {localize('com_nav_my_files')}
         </Select.SelectItem>
-        {startupConfig?.helpAndFaqURL !== '/' && (
-          <Select.SelectItem
-            value=""
-            onClick={() => window.open(startupConfig?.helpAndFaqURL, '_blank')}
-            className="select-item text-sm"
-          >
-            <LinkIcon aria-hidden="true" />
-            {localize('com_nav_help_faq')}
-          </Select.SelectItem>
-        )}
         <Select.SelectItem
           value=""
           onClick={() => setShowSettings(true)}

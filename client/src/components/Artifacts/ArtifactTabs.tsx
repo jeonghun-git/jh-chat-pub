@@ -45,7 +45,8 @@ export default function ArtifactTabs({
       </Tabs.Content>
       <Tabs.Content
         value="preview"
-        className={cn('flex-grow overflow-auto', isMermaid ? 'bg-[#282C34]' : 'bg-white')}
+        className={cn('flex-grow overflow-auto', 'bg-white dark:bg-white')}
+        style={{ backgroundColor: 'white' }}
       >
         <ArtifactPreview
           files={files}

@@ -8,6 +8,9 @@ import useLocalize from '~/hooks/useLocalize';
 import { UserIcon } from '~/components/svg';
 import { cn } from '~/utils';
 
+// favicon 이미지 import
+import faviconUrl from '../../../public/assets/favicon.ico';
+
 type UserAvatarProps = {
   size: number;
   user?: TUser;
@@ -26,14 +29,18 @@ const UserAvatar = memo(({ size, user, avatarSrc, username, className }: UserAva
   const renderDefaultAvatar = () => (
     <div
       style={{
-        backgroundColor: 'rgb(121, 137, 255)',
-        width: '20px',
-        height: '20px',
-        boxShadow: 'rgba(240, 246, 252, 0.1) 0px 0px 0px 1px',
+        width: '28px',
+        height: '28px',
       }}
-      className="relative flex h-9 w-9 items-center justify-center rounded-sm p-1 text-white"
+      className="relative flex items-center justify-center"
     >
-      <UserIcon />
+      <img 
+        src={faviconUrl} 
+        alt="User icon" 
+        width="100%" 
+        height="100%" 
+        style={{ objectFit: 'contain' }} 
+      />
     </div>
   );
 
@@ -51,9 +58,11 @@ const UserAvatar = memo(({ size, user, avatarSrc, username, className }: UserAva
           renderDefaultAvatar()
         ) : (
           <img
-            className="rounded-full"
             src={(user?.avatar ?? '') || avatarSrc}
             alt="avatar"
+            width="100%" 
+            height="100%"
+            style={{ objectFit: 'contain' }}
             onError={handleImageError}
           />
         )}

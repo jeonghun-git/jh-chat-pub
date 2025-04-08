@@ -18,27 +18,27 @@ const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ content }) => {
   useEffect(() => {
     mermaid.initialize({
       startOnLoad: false,
-      theme: 'base',
+      theme: 'default',
       securityLevel: 'sandbox',
       themeVariables: {
-        background: '#282C34',
-        primaryColor: '#333842',
-        secondaryColor: '#333842',
-        tertiaryColor: '#333842',
-        primaryTextColor: '#ABB2BF',
-        secondaryTextColor: '#ABB2BF',
-        lineColor: '#636D83',
+        background: '#FFFFFF',
+        primaryColor: '#E9F2FF',
+        secondaryColor: '#F0F7FF',
+        tertiaryColor: '#F5F9FF',
+        primaryTextColor: '#333333',
+        secondaryTextColor: '#444444',
+        lineColor: '#4B7BEC',
         fontSize: '16px',
-        nodeBorder: '#636D83',
-        mainBkg: '#282C34',
-        altBackground: '#282C34',
-        textColor: '#ABB2BF',
-        edgeLabelBackground: '#282C34',
-        clusterBkg: '#282C34',
-        clusterBorder: '#636D83',
-        labelBoxBkgColor: '#333842',
-        labelBoxBorderColor: '#636D83',
-        labelTextColor: '#ABB2BF',
+        nodeBorder: '#4B7BEC',
+        mainBkg: '#FFFFFF',
+        altBackground: '#FFFFFF',
+        textColor: '#333333',
+        edgeLabelBackground: '#FFFFFF',
+        clusterBkg: '#F8FAFF',
+        clusterBorder: '#4B7BEC',
+        labelBoxBkgColor: '#F0F7FF',
+        labelBoxBorderColor: '#4B7BEC',
+        labelTextColor: '#333333',
       },
       flowchart: {
         curve: 'basis',
@@ -72,7 +72,7 @@ const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ content }) => {
             rectElements.forEach((rect) => {
               const parent = rect.parentElement;
               if (parent && parent.classList.contains('node')) {
-                rect.style.stroke = '#636D83';
+                rect.style.stroke = '#4B7BEC';
                 rect.style.strokeWidth = '1px';
               } else {
                 rect.style.stroke = 'none';
@@ -143,7 +143,7 @@ const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ content }) => {
   };
 
   return (
-    <div className="relative h-screen w-screen cursor-move bg-[#282C34] p-5">
+    <div className="relative h-screen w-screen cursor-move bg-white p-5">
       <TransformWrapper
         ref={transformRef}
         initialScale={1}
@@ -160,11 +160,11 @@ const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ content }) => {
         {({ zoomIn, zoomOut }) => (
           <>
             <TransformComponent
-              wrapperStyle={{ width: '100%', height: '100%', overflow: 'hidden' }}
+              wrapperStyle={{ width: '100%', height: '100%', overflow: 'hidden', background: 'white' }}
             >
               <div
                 ref={mermaidRef}
-                style={{ width: 'auto', height: 'auto', minWidth: '100%', minHeight: '100%' }}
+                style={{ width: 'auto', height: 'auto', minWidth: '100%', minHeight: '100%', background: 'white' }}
               />
             </TransformComponent>
             <div className="absolute bottom-2 right-2 flex space-x-2">

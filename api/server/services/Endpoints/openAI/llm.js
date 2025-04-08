@@ -92,7 +92,7 @@ function getLLMConfig(apiKey, options = {}, endpoint = null) {
     configOptions.defaultHeaders = Object.assign(
       {
         'HTTP-Referer': 'https://librechat.ai',
-        'X-Title': 'LibreChat',
+        'X-Title': 'jh-chat',
       },
       headers,
     );

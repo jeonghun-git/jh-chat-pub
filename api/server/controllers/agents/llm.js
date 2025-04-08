@@ -71,7 +71,7 @@ function initializeLLM(options) {
     configOptions.baseOptions = {
       headers: {
         'HTTP-Referer': 'https://librechat.ai',
-        'X-Title': 'LibreChat',
+        'X-Title': 'jh-chat',
       },
     };
   }

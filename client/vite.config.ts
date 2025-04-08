@@ -14,11 +14,11 @@ export default defineConfig({
     strictPort: false,
     proxy: {
       '/api': {
-        target: 'http://localhost:3080',
+        target: 'http://localhost:8080',
         changeOrigin: true,
       },
       '/oauth': {
-        target: 'http://localhost:3080',
+        target: 'http://localhost:8080',
         changeOrigin: true,
       },
     },
@@ -44,13 +44,18 @@ export default defineConfig({
       },
       includeAssets: ['**/*'],
       manifest: {
-        name: 'LibreChat',
-        short_name: 'LibreChat',
+        name: 'jh-chat',
+        short_name: 'jh-chat',
         start_url: '/',
         display: 'standalone',
         background_color: '#000000',
         theme_color: '#009688',
         icons: [
+          {
+            src: '/assets/favicon.ico',
+            sizes: '48x48',
+            type: 'image/x-icon',
+          },
           {
             src: '/assets/favicon-32x32.png',
             sizes: '32x32',

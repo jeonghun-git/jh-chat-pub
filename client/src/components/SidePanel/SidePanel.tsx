@@ -104,6 +104,10 @@ const SidePanel = ({
         setCollapsedSize(navCollapsedSize);
         setFullCollapse(false);
         localStorage.setItem('fullPanelCollapse', 'false');
+      } else {
+        setFullCollapse(true);
+        setCollapsedSize(0);
+        localStorage.setItem('fullPanelCollapse', 'true');
       }
       return !prev;
     });
@@ -161,7 +165,10 @@ const SidePanel = ({
         }}
         onCollapse={() => {
           setIsCollapsed(true);
+          setFullCollapse(true);
+          setCollapsedSize(0);
           localStorage.setItem('react-resizable-panels:collapsed', 'true');
+          localStorage.setItem('fullPanelCollapse', 'true');
         }}
         className={cn(
           'sidenav hide-scrollbar border-l border-border-light bg-background py-1 transition-opacity',

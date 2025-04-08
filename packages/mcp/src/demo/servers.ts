@@ -21,7 +21,7 @@ const mcpServers: t.MCPServers = {
   filesystem: {
     type: 'stdio' as const,
     command: 'npx',
-    args: ['-y', '@modelcontextprotocol/server-filesystem', '/home/danny/LibreChat/'],
+    args: ['-y', '@modelcontextprotocol/server-filesystem', '/home/danny/jh-chat/'],
   },
 };
 

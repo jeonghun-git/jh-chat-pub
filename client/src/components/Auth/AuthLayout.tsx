@@ -65,7 +65,7 @@ function AuthLayout({
           <img
             src="/assets/logo.svg"
             className="h-full w-full object-contain"
-            alt={localize('com_ui_logo', { 0: startupConfig?.appTitle ?? 'LibreChat' })}
+            alt={localize('com_ui_logo', { 0: startupConfig?.appTitle ?? 'jh-chat' })}
           />
         </div>
       </BlinkAnimation>
@@ -78,8 +78,8 @@ function AuthLayout({
         <div className="w-authPageWidth overflow-hidden bg-white px-6 py-4 dark:bg-gray-900 sm:max-w-md sm:rounded-lg">
           {!hasStartupConfigError && !isFetching && (
             <h1
-              className="mb-4 text-center text-3xl font-semibold text-black dark:text-white"
-              style={{ userSelect: 'none' }}
+              className="mb-5 pb-3 text-center font-semibold text-black dark:text-white text-xl sm:text-2xl md:text-3xl"
+              style={{ userSelect: 'none', whiteSpace: 'pre-line', lineHeight: '1.8' }}
             >
               {header}
             </h1>

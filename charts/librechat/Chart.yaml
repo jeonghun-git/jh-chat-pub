@@ -1,4 +1,4 @@
 apiVersion: v2
-name: librechat
+name: jh-chat
 type: application
 version: 1.0.0

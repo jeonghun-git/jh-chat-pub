@@ -1,6 +1,6 @@
 {
   "name": "librechat-data-provider",
-  "version": "0.7.789",
+  "version": "1.0.089",
   "description": "data services for librechat apps",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -30,12 +30,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/danny-avila/LibreChat.git"
+    "url": "git+https://github.com/danny-avila/jh-chat.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/danny-avila/LibreChat/issues"
+    "url": "https://github.com/danny-avila/jh-chat/issues"
   },
   "homepage": "https://librechat.ai",
   "dependencies": {

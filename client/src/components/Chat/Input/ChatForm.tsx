@@ -32,6 +32,7 @@ import { BadgeRow } from './BadgeRow';
 import EditBadges from './EditBadges';
 import Mention from './Mention';
 import store from '~/store';
+import { ArtifactButton } from '~/components/Chat/ArtifactButton';
 
 const ChatForm = memo(({ index = 0 }: { index?: number }) => {
   const submitButtonRef = useRef<HTMLButtonElement>(null);
@@ -50,7 +51,7 @@ const ChatForm = memo(({ index = 0 }: { index?: number }) => {
   const automaticPlayback = useRecoilValue(store.automaticPlayback);
   const maximizeChatSpace = useRecoilValue(store.maximizeChatSpace);
   const centerFormOnLanding = useRecoilValue(store.centerFormOnLanding);
-  const isTemporary = useRecoilValue(store.isTemporary);
+  const codeArtifacts = useRecoilValue(store.codeArtifacts);
 
   const [badges, setBadges] = useRecoilState(store.chatBadges);
   const [isEditingBadges, setIsEditingBadges] = useRecoilState(store.isEditingBadges);
@@ -226,9 +227,7 @@ const ChatForm = memo(({ index = 0 }: { index?: number }) => {
             className={cn(
               'relative flex w-full flex-grow flex-col overflow-hidden rounded-t-3xl border pb-4 text-text-primary transition-all duration-200 sm:rounded-3xl sm:pb-0',
               isTextAreaFocused ? 'shadow-lg' : 'shadow-md',
-              isTemporary
-                ? 'border-violet-800/60 bg-violet-950/10'
-                : 'border-border-light bg-surface-chat',
+              'border-border-light bg-surface-chat',
             )}
           >
             <TextareaHeader addedConvo={addedConvo} setAddedConvo={setAddedConvo} />
@@ -285,8 +284,11 @@ const ChatForm = memo(({ index = 0 }: { index?: number }) => {
                 isRTL ? 'flex-row-reverse' : 'flex-row',
               )}
             >
-              <div className={`${isRTL ? 'mr-2' : 'ml-2'}`}>
+              <div className={`${isRTL ? 'mr-1' : 'ml-3 mt-0.5'}`}>
                 <AttachFileChat disableInputs={disableInputs} />
+              </div>
+              <div className={`${isRTL ? 'mr-2' : '-ml-1'}`}>
+                <ArtifactButton />
               </div>
               <BadgeRow
                 onChange={(newBadges) => setBadges(newBadges)}
@@ -304,7 +306,7 @@ const ChatForm = memo(({ index = 0 }: { index?: number }) => {
                   isSubmitting={isSubmitting}
                 />
               )}
-              <div className={`${isRTL ? 'ml-2' : 'mr-2'}`}>
+              <div className={`${isRTL ? 'ml-2' : 'mr-3'}`}>
                 {(isSubmitting || isSubmittingAdded) && (showStopButton || showStopAdded) ? (
                   <StopButton stop={handleStopGenerating} setShowStopButton={setShowStopButton} />
                 ) : (

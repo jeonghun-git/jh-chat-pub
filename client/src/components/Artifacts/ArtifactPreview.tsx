@@ -57,21 +57,25 @@ export const ArtifactPreview = memo(function ({
   }
 
   return (
-    <SandpackProvider
-      files={{
-        ...artifactFiles,
-        ...sharedFiles,
-      }}
-      options={options}
-      {...sharedProps}
-      template={template}
-    >
-      <SandpackPreview
-        showOpenInCodeSandbox={false}
-        showRefreshButton={false}
-        tabIndex={0}
-        ref={previewRef}
-      />
-    </SandpackProvider>
+    <div className="bg-white w-full h-full">
+      <SandpackProvider
+        theme="light"
+        files={{
+          ...artifactFiles,
+          ...sharedFiles,
+        }}
+        options={options}
+        {...sharedProps}
+        template={template}
+      >
+        <SandpackPreview
+          showOpenInCodeSandbox={false}
+          showRefreshButton={false}
+          tabIndex={0}
+          ref={previewRef}
+          style={{ background: 'white' }}
+        />
+      </SandpackProvider>
+    </div>
   );
 });

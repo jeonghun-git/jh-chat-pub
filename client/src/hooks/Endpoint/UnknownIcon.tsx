@@ -4,23 +4,41 @@ import { CustomMinimalIcon } from '~/components/svg';
 import { IconContext } from '~/common';
 import { cn } from '~/utils';
 
+// 아이콘 파일들을 직접 import
+import anyscaleIcon from '../../../public/assets/anyscale.png';
+import apipieIcon from '../../../public/assets/apipie.png';
+import cohereIcon from '../../../public/assets/cohere.png';
+import deepseekIcon from '../../../public/assets/deepseek.svg';
+import fireworksIcon from '../../../public/assets/fireworks.png';
+import groqIcon from '../../../public/assets/groq.png';
+import huggingfaceIcon from '../../../public/assets/huggingface.svg';
+import mistralIcon from '../../../public/assets/mistral.png';
+import mlxIcon from '../../../public/assets/mlx.png';
+import ollamaIcon from '../../../public/assets/ollama.png';
+import openrouterIcon from '../../../public/assets/openrouter.png';
+import perplexityIcon from '../../../public/assets/perplexity.png';
+import shuttleaiIcon from '../../../public/assets/shuttleai.png';
+import togetherIcon from '../../../public/assets/together.png';
+import unifyIcon from '../../../public/assets/unify.webp';
+import xaiIcon from '../../../public/assets/xai.svg';
+
 const knownEndpointAssets = {
-  [KnownEndpoints.anyscale]: '/assets/anyscale.png',
-  [KnownEndpoints.apipie]: '/assets/apipie.png',
-  [KnownEndpoints.cohere]: '/assets/cohere.png',
-  [KnownEndpoints.deepseek]: '/assets/deepseek.svg',
-  [KnownEndpoints.fireworks]: '/assets/fireworks.png',
-  [KnownEndpoints.groq]: '/assets/groq.png',
-  [KnownEndpoints.huggingface]: '/assets/huggingface.svg',
-  [KnownEndpoints.mistral]: '/assets/mistral.png',
-  [KnownEndpoints.mlx]: '/assets/mlx.png',
-  [KnownEndpoints.ollama]: '/assets/ollama.png',
-  [KnownEndpoints.openrouter]: '/assets/openrouter.png',
-  [KnownEndpoints.perplexity]: '/assets/perplexity.png',
-  [KnownEndpoints.shuttleai]: '/assets/shuttleai.png',
-  [KnownEndpoints['together.ai']]: '/assets/together.png',
-  [KnownEndpoints.unify]: '/assets/unify.webp',
-  [KnownEndpoints.xai]: '/assets/xai.svg',
+  [KnownEndpoints.anyscale]: anyscaleIcon,
+  [KnownEndpoints.apipie]: apipieIcon,
+  [KnownEndpoints.cohere]: cohereIcon,
+  [KnownEndpoints.deepseek]: deepseekIcon,
+  [KnownEndpoints.fireworks]: fireworksIcon,
+  [KnownEndpoints.groq]: groqIcon,
+  [KnownEndpoints.huggingface]: huggingfaceIcon,
+  [KnownEndpoints.mistral]: mistralIcon,
+  [KnownEndpoints.mlx]: mlxIcon,
+  [KnownEndpoints.ollama]: ollamaIcon,
+  [KnownEndpoints.openrouter]: openrouterIcon,
+  [KnownEndpoints.perplexity]: perplexityIcon,
+  [KnownEndpoints.shuttleai]: shuttleaiIcon,
+  [KnownEndpoints['together.ai']]: togetherIcon,
+  [KnownEndpoints.unify]: unifyIcon,
+  [KnownEndpoints.xai]: xaiIcon,
 };
 
 const knownEndpointClasses = {
@@ -76,7 +94,7 @@ function UnknownIcon({
     return <img className={className} src={iconURL} alt={`${endpoint} Icon`} />;
   }
 
-  const assetPath: string = knownEndpointAssets[currentEndpoint] ?? '';
+  const assetPath: string | undefined = knownEndpointAssets[currentEndpoint];
 
   if (!assetPath) {
     return <CustomMinimalIcon className={className} />;

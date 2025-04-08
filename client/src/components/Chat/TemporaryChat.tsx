@@ -28,13 +28,6 @@ export function TemporaryChat() {
     [isTemporary],
   );
 
-  if (
-    (Array.isArray(conversation?.messages) && conversation.messages.length >= 1) ||
-    isSubmitting
-  ) {
-    return null;
-  }
-
   return (
     <div className="relative flex flex-wrap items-center gap-2">
       <div className="badge-icon h-full">

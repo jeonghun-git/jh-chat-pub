@@ -27,8 +27,8 @@ const NewChatButtonIcon = ({ conversation }: { conversation: TConversation | nul
 
   let { endpoint = '' } = conversation ?? {};
   const iconURL = conversation?.iconURL ?? '';
-  endpoint = getIconEndpoint({ endpointsConfig, iconURL, endpoint });
-
+  endpoint = 'OpenRouter';
+  
   const endpointType = getEndpointField(endpointsConfig, endpoint, 'type');
   const endpointIconURL = getEndpointField(endpointsConfig, endpoint, 'iconURL');
   const iconKey = getIconKey({ endpoint, endpointsConfig, endpointType, endpointIconURL });
@@ -49,8 +49,8 @@ const NewChatButtonIcon = ({ conversation }: { conversation: TConversation | nul
             <Icon
               size={41}
               context="nav"
-              className="h-2/3 w-2/3"
-              endpoint={endpoint}
+              endpoint="OpenRouter"
+              className="h-4/5 w-4/5"
               endpointType={endpointType}
               iconURL={endpointIconURL}
             />

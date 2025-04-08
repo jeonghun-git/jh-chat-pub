@@ -124,7 +124,7 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
 
   return (
     <div
-      className={`flex h-full transform-gpu flex-col items-center justify-center pb-16 transition-all duration-200 ${centerFormOnLanding ? 'max-h-full sm:max-h-0' : 'max-h-full'} ${getDynamicMargin}`}
+      className={`flex h-full transform-gpu flex-col items-center justify-center pb-12 transition-all duration-200 ${centerFormOnLanding ? 'max-h-full sm:max-h-0' : 'max-h-full'} ${getDynamicMargin}`}
     >
       <div ref={contentRef} className="flex flex-col items-center gap-0 p-2">
         <div
@@ -134,12 +134,12 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
             <ConvoIcon
               agentsMap={agentsMap}
               assistantMap={assistantMap}
-              conversation={conversation}
+              conversation={{ ...conversation, endpoint: 'OpenRouter' }}
+              className='h-4/5 w-4/5'
               endpointsConfig={endpointsConfig}
               containerClassName={containerClassName}
               context="landing"
-              className="h-2/3 w-2/3"
-              size={41}
+              size={38}
             />
             {startupConfig?.showBirthdayIcon && (
               <TooltipAnchor
@@ -151,7 +151,7 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
             )}
           </div>
           {((isAgent || isAssistant) && name) || name ? (
-            <div className="flex flex-col items-center gap-0 p-2">
+            <div className="flex flex-col items-center gap-0 -mb-2">
               <SplitText
                 key={`split-text-${name}`}
                 text={name}

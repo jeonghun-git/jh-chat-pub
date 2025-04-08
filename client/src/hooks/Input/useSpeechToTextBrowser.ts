@@ -79,7 +79,7 @@ const useSpeechToTextBrowser = (
 
     if (!isMicrophoneAvailable) {
       showToast({
-        message: 'Microphone is not available',
+        message: '마이크 사용이 불가능한 상태입니다.',
         status: 'error',
       });
       return;

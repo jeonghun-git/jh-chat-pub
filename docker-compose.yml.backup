@@ -5,7 +5,7 @@ services:
   api:
     container_name: jh-chat
     ports:
-      - "8080:8080"
+      - "${PORT}:${PORT}"
     depends_on:
       - mongodb
       - rag_api
@@ -30,7 +30,6 @@ services:
       - ./images:/app/client/public/images
       - ./uploads:/app/uploads
       - ./logs:/app/api/logs
-      - ./data:/app/data
   mongodb:
     container_name: chat-mongodb
     image: mongo

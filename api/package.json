@@ -1,6 +1,6 @@
 {
   "name": "@librechat/backend",
-  "version": "v0.7.7",
+  "version": "v1.0.0",
   "description": "",
   "scripts": {
     "start": "echo 'please run this from the root directory'",
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/danny-avila/LibreChat.git"
+    "url": "git+https://github.com/danny-avila/jh-chat.git"
   },
   "keywords": [],
   "author": "",
@@ -30,7 +30,7 @@
     "~/*": "./*"
   },
   "bugs": {
-    "url": "https://github.com/danny-avila/LibreChat/issues"
+    "url": "https://github.com/danny-avila/jh-chat/issues"
   },
   "homepage": "https://librechat.ai",
   "dependencies": {

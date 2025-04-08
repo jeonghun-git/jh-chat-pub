@@ -1,6 +1,6 @@
 {
-  "name": "LibreChat",
-  "version": "v0.7.7",
+  "name": "jh-chat",
+  "version": "v1.0.0",
   "description": "",
   "workspaces": [
     "api",
@@ -81,7 +81,7 @@
   "bugs": {
     "url": "https://github.com/danny-avila/LibreChat/issues"
   },
-  "homepage": "https://librechat.ai/",
+  "homepage": "https://jhun-park.xyz/",
   "devDependencies": {
     "@axe-core/playwright": "^4.10.1",
     "@eslint/compat": "^1.2.6",
