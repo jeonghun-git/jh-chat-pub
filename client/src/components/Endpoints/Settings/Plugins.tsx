@@ -223,7 +223,7 @@ export default function Settings({
         <HoverCard openDelay={300}>
           <HoverCardTrigger className="grid w-full items-center gap-2">
             <div className="flex justify-between">
-              <Label htmlFor="temp-int" className="text-left text-sm font-medium">
+              <Label htmlFor="temp-int" className="text-center text-sm font-medium">
                 {localize('com_endpoint_temperature')}{' '}
                 <small className="opacity-40">
                   ({localize('com_endpoint_default_with_num', { 0: '0.8' })})
@@ -242,7 +242,7 @@ export default function Settings({
                   defaultTextProps,
                   cn(
                     optionText,
-                    'reset-rc-number-input reset-rc-number-input-text-right h-auto w-12 border-0 group-hover/temp:border-gray-200',
+                    'reset-rc-number-input reset-rc-number-input-text-center h-auto w-12 border-0 group-hover/temp:border-gray-200',
                   ),
                 )}
               />
@@ -282,7 +282,7 @@ export default function Settings({
                   defaultTextProps,
                   cn(
                     optionText,
-                    'reset-rc-number-input reset-rc-number-input-text-right h-auto w-12 border-0 group-hover/temp:border-gray-200',
+                    'reset-rc-number-input reset-rc-number-input-text-center h-auto w-12 border-0 group-hover/temp:border-gray-200',
                   ),
                 )}
               />

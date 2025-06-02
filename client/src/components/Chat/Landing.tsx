@@ -11,6 +11,23 @@ import { getIconEndpoint, getEntity } from '~/utils';
 const containerClassName =
   'shadow-stroke relative flex h-full items-center justify-center rounded-full bg-white text-black';
 
+// Add rainbow edge animation styles
+const rainbowEdgeStyles = `
+  @keyframes rainbowEdge {
+    0% { text-shadow: 0 0 4px rgba(100, 149, 237, 0.8), 0 0 6px rgba(100, 149, 237, 0.4); }
+    16.67% { text-shadow: 0 0 4px rgba(65, 105, 225, 0.8), 0 0 6px rgba(65, 105, 225, 0.4); }
+    33.33% { text-shadow: 0 0 4px rgba(0, 128, 255, 0.8), 0 0 6px rgba(0, 128, 255, 0.4); }
+    50% { text-shadow: 0 0 4px rgba(30, 144, 255, 0.8), 0 0 6px rgba(30, 144, 255, 0.4); }
+    66.67% { text-shadow: 0 0 4px rgba(0, 191, 255, 0.8), 0 0 6px rgba(0, 191, 255, 0.4); }
+    83.33% { text-shadow: 0 0 4px rgba(135, 206, 250, 0.8), 0 0 6px rgba(135, 206, 250, 0.4); }
+    100% { text-shadow: 0 0 4px rgba(176, 196, 222, 0.8), 0 0 6px rgba(176, 196, 222, 0.4); }
+  }
+  
+  .rainbow-edge-text {
+    animation: rainbowEdge 8s ease-in-out infinite;
+  }
+`;
+
 export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: boolean }) {
   const { conversation } = useChatContext();
   const agentsMap = useAgentsMapContext();
@@ -123,39 +140,41 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
   }, [lineCount, description, textHasMultipleLines, contentHeight]);
 
   return (
-    <div
-      className={`flex h-full transform-gpu flex-col items-center justify-center pb-12 transition-all duration-200 ${centerFormOnLanding ? 'max-h-full sm:max-h-0' : 'max-h-full'} ${getDynamicMargin}`}
-    >
-      <div ref={contentRef} className="flex flex-col items-center gap-0 p-2">
-        <div
-          className={`flex ${textHasMultipleLines ? 'flex-col' : 'flex-col md:flex-row'} items-center justify-center gap-4`}
-        >
-          <div className={`relative size-10 justify-center ${textHasMultipleLines ? 'mb-2' : ''}`}>
-            <ConvoIcon
-              agentsMap={agentsMap}
-              assistantMap={assistantMap}
-              conversation={{ ...conversation, endpoint: 'OpenRouter' }}
-              className='h-4/5 w-4/5'
-              endpointsConfig={endpointsConfig}
-              containerClassName={containerClassName}
-              context="landing"
-              size={38}
-            />
-            {startupConfig?.showBirthdayIcon && (
-              <TooltipAnchor
-                className="absolute bottom-[27px] right-2"
-                description={localize('com_ui_happy_birthday')}
-              >
-                <BirthdayIcon />
-              </TooltipAnchor>
-            )}
-          </div>
-          {((isAgent || isAssistant) && name) || name ? (
-            <div className="flex flex-col items-center gap-0 -mb-2">
+    <>
+      {/* Add style tag for rainbow edge animation */}
+      <style>{rainbowEdgeStyles}</style>
+      <div
+        className={`flex h-full transform-gpu flex-col items-center justify-center pb-12 transition-all duration-200 ${centerFormOnLanding ? 'max-h-full sm:max-h-0' : 'max-h-full'} ${getDynamicMargin}`}
+      >
+        <div ref={contentRef} className="flex flex-col items-center gap-0 p-2">
+          <div
+            className={`flex ${textHasMultipleLines ? 'flex-col' : 'flex-col md:flex-row'} items-center justify-center gap-4`}
+          >
+            {((isAgent || isAssistant) && name) || name ? (
+              <div className="flex flex-col items-center gap-0 -mb-2">
+                <SplitText
+                  key={`split-text-${name}`}
+                  text={name}
+                  className="text-4xl font-medium text-text-primary rainbow-edge-text"
+                  delay={50}
+                  textAlign="center"
+                  animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+                  animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+                  easing={easings.easeOutCubic}
+                  threshold={0}
+                  rootMargin="0px"
+                  onLineCountChange={handleLineCountChange}
+                />
+              </div>
+            ) : (
               <SplitText
-                key={`split-text-${name}`}
-                text={name}
-                className="text-4xl font-medium text-text-primary"
+                key={`split-text-${getGreeting()}${user?.name ? '-user' : ''}`}
+                text={
+                  typeof startupConfig?.interface?.customWelcome === 'string'
+                    ? getGreeting()
+                    : getGreeting() + (user?.name ? ', ' + user.name : '')
+                }
+                className="text-2xl font-medium text-text-primary rainbow-edge-text sm:text-4xl"
                 delay={50}
                 textAlign="center"
                 animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
@@ -165,33 +184,15 @@ export default function Landing({ centerFormOnLanding }: { centerFormOnLanding: 
                 rootMargin="0px"
                 onLineCountChange={handleLineCountChange}
               />
+            )}
+          </div>
+          {(isAgent || isAssistant) && description && (
+            <div className="animate-fadeIn mt-2 max-w-md text-center text-sm font-normal text-text-primary">
+              {description}
             </div>
-          ) : (
-            <SplitText
-              key={`split-text-${getGreeting()}${user?.name ? '-user' : ''}`}
-              text={
-                typeof startupConfig?.interface?.customWelcome === 'string'
-                  ? getGreeting()
-                  : getGreeting() + (user?.name ? ', ' + user.name : '')
-              }
-              className="text-2xl font-medium text-text-primary sm:text-4xl"
-              delay={50}
-              textAlign="center"
-              animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
-              animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
-              easing={easings.easeOutCubic}
-              threshold={0}
-              rootMargin="0px"
-              onLineCountChange={handleLineCountChange}
-            />
           )}
         </div>
-        {(isAgent || isAssistant) && description && (
-          <div className="animate-fadeIn mt-2 max-w-md text-center text-sm font-normal text-text-primary">
-            {description}
-          </div>
-        )}
       </div>
-    </div>
+    </>
   );
 }

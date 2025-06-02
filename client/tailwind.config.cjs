@@ -34,6 +34,18 @@ module.exports = {
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
       colors: {
+        skyblue: {
+          50: '#e6f1ff',
+          100: '#cce3ff',
+          200: '#99c6ff',
+          300: '#66a9ff',
+          400: '#338dff',
+          500: '#0070f3',
+          600: '#0056b3',
+          700: '#004080',
+          800: '#002c57',
+          900: '#001e3d',
+        },
         gray: {
           20: '#ececf1',
           50: '#f7f7f8',

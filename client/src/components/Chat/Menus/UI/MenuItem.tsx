@@ -38,10 +38,11 @@ const MenuItem: FC<MenuItemProps> = ({
       aria-label={title}
       data-testid="chat-menu-item"
       className={cn(
-        'group m-1.5 flex cursor-pointer gap-2 rounded px-5 py-2.5 !pr-3 text-sm !opacity-100 hover:bg-black/5 focus:ring-0 radix-disabled:pointer-events-none radix-disabled:opacity-50 dark:hover:bg-gray-600 md:min-w-[240px]',
+        'group m-1 flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-sm !opacity-100 transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 radix-disabled:pointer-events-none radix-disabled:opacity-50 dark:hover:bg-gray-700/70 dark:focus:ring-gray-600 md:min-w-[200px]',
+        selected && 'bg-gray-50 dark:bg-gray-700/50',
         className || '',
       )}
-      tabIndex={0} // Change to 0 to make it focusable
+      tabIndex={0}
       onClick={onClick}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -53,26 +54,24 @@ const MenuItem: FC<MenuItemProps> = ({
       }}
       {...rest}
     >
-      <div className="flex grow items-center justify-between gap-2">
-        <div>
-          <div className={cn('flex items-center gap-1 ')}>
-            {icon != null ? icon : null}
-            <div className={cn('truncate', textClassName)}>
-              {title}
-              <div className="text-token-text-tertiary">{description}</div>
-            </div>
+      <div className="flex w-full items-center justify-between gap-2">
+        <div className="flex items-center gap-2 overflow-hidden">
+          {icon != null ? icon : null}
+          <div className={cn('flex-1 truncate font-medium', textClassName)}>
+            {title}
+            {description && <div className="text-xs text-gray-500 dark:text-gray-400">{description}</div>}
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-1">
           {children}
           {selected && (
             <svg
-              width="24"
-              height="24"
+              width="18"
+              height="18"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="icon-md block "
+              className="text-sky-500 dark:text-sky-400"
             >
               <path
                 fillRule="evenodd"

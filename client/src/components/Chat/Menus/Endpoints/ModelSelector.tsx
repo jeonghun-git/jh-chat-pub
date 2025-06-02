@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import type { ModelSelectorProps } from '~/common';
 import { ModelSelectorProvider, useModelSelectorContext } from './ModelSelectorContext';
 import { renderModelSpecs, renderEndpoints, renderSearchResults } from './components';
-import { getSelectedIcon, getDisplayValue } from './utils';
+import { getSelectedIcon, getDisplayValue, formatModelName } from './utils';
 import { CustomMenu as Menu } from './CustomMenu';
 import DialogManager from './DialogManager';
 import { useLocalize } from '~/hooks';
@@ -50,9 +50,19 @@ function ModelSelectorContent() {
     [localize, modelSpecs, selectedValues, mappedEndpoints],
   );
 
+  // OpenRouter 모델 이름 포맷팅을 처리하기 위한 렌더링 함수
+  const renderDisplayValue = () => {
+    if (typeof selectedDisplayValue === 'string' &&
+      (selectedValues.endpoint || '').toLowerCase() === 'openrouter' &&
+      selectedDisplayValue.includes('/')) {
+      return formatModelName(selectedDisplayValue, 'openrouter');
+    }
+    return selectedDisplayValue;
+  };
+
   const trigger = (
     <button
-      className="my-1 flex h-10 w-full max-w-[70vw] items-center justify-center gap-2 rounded-xl border border-border-light bg-surface-secondary px-3 py-2 text-sm text-text-primary hover:bg-surface-tertiary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+      className="my-1 flex h-10 w-full max-w-[70vw] items-center justify-center gap-2 rounded-xl border border-border-light bg-surface-secondary px-3 py-2 text-sm text-text-primary hover:bg-surface-tertiary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white"
       aria-label={localize('com_ui_select_model')}
     >
       {selectedIcon && React.isValidElement(selectedIcon) && (
@@ -60,7 +70,7 @@ function ModelSelectorContent() {
           {selectedIcon}
         </div>
       )}
-      <span className="flex-grow truncate text-left">{selectedDisplayValue}</span>
+      <span className="flex-grow truncate text-left">{renderDisplayValue()}</span>
     </button>
   );
 

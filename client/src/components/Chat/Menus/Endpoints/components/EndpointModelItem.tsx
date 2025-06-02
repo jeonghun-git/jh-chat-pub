@@ -4,12 +4,74 @@ import { isAgentsEndpoint, isAssistantsEndpoint } from 'librechat-data-provider'
 import type { Endpoint } from '~/common';
 import { useModelSelectorContext } from '../ModelSelectorContext';
 import { CustomMenuItem as MenuItem } from '../CustomMenu';
+import { formatModelName, formatProviderName } from '../utils';
+import { cn } from '~/utils';
 
 interface EndpointModelItemProps {
   modelId: string | null;
   endpoint: Endpoint;
   isSelected: boolean;
 }
+
+// 제공업체별 색상 맵
+const providerColorMap: Record<string, string> = {
+  'google': 'text-blue-600',
+  'openai': 'text-emerald-500',
+  'anthropic': 'text-red-500',
+  'meta-llama': 'text-blue-700',
+  'deepseek': 'text-indigo-500',
+  'microsoft': 'text-blue-500',
+  'mistral': 'text-purple-500',
+  'cloudflare': 'text-orange-500',
+  'perplexity': 'text-pink-500',
+  'cohere': 'text-teal-500',
+  'thudm': 'text-amber-500',
+  'nousresearch': 'text-emerald-500',
+  'sfrg': 'text-violet-600',
+  'aleph': 'text-sky-500',
+  '01-ai': 'text-rose-500',
+  'databricks': 'text-orange-600'
+};
+
+// 공백을 더 추가하기 위한 사용자 정의 함수
+const formatModelWithSpace = (modelName: string, endpointValue: string) => {
+  if (!modelName) return null;
+
+  if (endpointValue.toLowerCase() === 'openrouter' && modelName.includes('/')) {
+    const parts = modelName.split('/');
+    const provider = parts[0];
+    let modelPart = parts.slice(1).join('/');
+
+    // :free를 직접 대체
+    if (modelPart.includes(':free')) {
+      modelPart = modelPart.replace(':free', 'free');
+    }
+
+    // 제공업체에 맞는 색상 선택 (없으면 회색 사용)
+    const colorClass = providerColorMap[provider.toLowerCase()] || 'text-slate-500';
+
+    // 모델명의 마지막 '-free' 부분만 특별히 표시
+    if (modelPart.endsWith('free')) {
+      const basePart = modelPart.substring(0, modelPart.length - 4);
+      return (
+        <div className="flex items-center">
+          <span className={`font-medium ${colorClass} w-[85px] inline-block opacity-90`}>{formatProviderName(provider)}</span>
+          <span className="ml-4 truncate opacity-90 font-light">{basePart}</span>
+          <span className="ml-3 text-pink-400 font-medium opacity-90 italic">free</span>
+        </div>
+      );
+    }
+
+    return (
+      <div className="flex items-center">
+        <span className={`font-medium ${colorClass} w-[85px] inline-block opacity-90`}>{formatProviderName(provider)}</span>
+        <span className="ml-4 opacity-90 font-light">{modelPart}</span>
+      </div>
+    );
+  }
+
+  return <span>{modelName}</span>;
+};
 
 export function EndpointModelItem({ modelId, endpoint, isSelected }: EndpointModelItemProps) {
   const { handleSelectModel } = useModelSelectorContext();
@@ -45,11 +107,11 @@ export function EndpointModelItem({ modelId, endpoint, isSelected }: EndpointMod
           </div>
         ) : (isAgentsEndpoint(endpoint.value) || isAssistantsEndpoint(endpoint.value)) &&
           endpoint.icon ? (
-            <div className="flex h-5 w-5 items-center justify-center overflow-hidden rounded-full">
-              {endpoint.icon}
-            </div>
-          ) : null}
-        <span>{modelName}</span>
+          <div className="flex h-5 w-5 items-center justify-center overflow-hidden rounded-full">
+            {endpoint.icon}
+          </div>
+        ) : null}
+        {formatModelWithSpace(modelName || '', endpoint.value)}
       </div>
       {isGlobal && <EarthIcon className="ml-auto size-4 text-green-400" />}
       {isSelected && (
@@ -60,7 +122,9 @@ export function EndpointModelItem({ modelId, endpoint, isSelected }: EndpointMod
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="block"
+          aria-label="Selected"
         >
+          <title>Selected</title>
           <path
             fillRule="evenodd"
             clipRule="evenodd"
@@ -81,11 +145,14 @@ export function renderEndpointModels(
 ) {
   const modelsToRender = filteredModels || models.map((model) => model.name);
 
-  return modelsToRender.map(
-    (modelId) =>
+  // 중복 제거
+  const uniqueModels = [...new Set(modelsToRender)];
+
+  return uniqueModels.map(
+    (modelId, index) =>
       endpoint && (
         <EndpointModelItem
-          key={modelId}
+          key={`${endpoint.value}-${modelId}-${index}`}
           modelId={modelId}
           endpoint={endpoint}
           isSelected={selectedModel === modelId}

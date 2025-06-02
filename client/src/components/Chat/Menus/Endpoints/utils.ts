@@ -11,6 +11,26 @@ import type { useLocalize } from '~/hooks';
 import SpecIcon from '~/components/Chat/Menus/Endpoints/components/SpecIcon';
 import { Endpoint, SelectedValues } from '~/common';
 
+// 제공업체별 색상 맵
+const providerColorMap: Record<string, string> = {
+  'google': 'text-blue-600',
+  'openai': 'text-emerald-500',
+  'anthropic': 'text-red-500',
+  'meta-llama': 'text-blue-700',
+  'deepseek': 'text-indigo-500',
+  'microsoft': 'text-blue-500',
+  'mistral': 'text-purple-500',
+  'cloudflare': 'text-orange-500',
+  'perplexity': 'text-pink-500',
+  'cohere': 'text-teal-500',
+  'thudm': 'text-amber-500',
+  'nousresearch': 'text-emerald-500',
+  'sfrg': 'text-violet-600',
+  'aleph': 'text-sky-500',
+  '01-ai': 'text-rose-500',
+  'databricks': 'text-orange-600'
+};
+
 export function filterItems<
   T extends {
     label: string;
@@ -209,4 +229,59 @@ export const getDisplayValue = ({
   }
 
   return localize('com_ui_select_model');
+};
+
+// 제공업체 이름 포맷팅 함수
+export const formatProviderName = (provider: string): string => {
+  switch (provider.toLowerCase()) {
+    case 'deepseek':
+      return 'DeepSeek';
+    case 'openai':
+      return 'OpenAI';
+    case 'openrouter':
+      return 'OpenRouter';
+    case 'meta-llama':
+      return 'Meta-Llama';
+    default:
+      return provider.charAt(0).toUpperCase() + provider.slice(1).toLowerCase();
+  }
+};
+
+export const formatModelName = (
+  modelName: string,
+  endpoint: string,
+) => {
+  if (endpoint.toLowerCase() === 'openrouter' && modelName.includes('/')) {
+    const parts = modelName.split('/');
+    const provider = parts[0];
+    let modelPart = parts.slice(1).join('/');
+
+    // :free를 직접 -free로 대체
+    if (modelPart.includes(':free')) {
+      modelPart = modelPart.replace(':free', 'free');
+    }
+
+    const colorClass = providerColorMap[provider.toLowerCase()] || 'text-slate-500';
+
+    if (modelPart.endsWith('free')) {
+      const basePart = modelPart.substring(0, modelPart.length - 4);
+
+      return React.createElement(
+        'div',
+        { className: 'flex items-center' },
+        React.createElement('span', { className: `font-medium ${colorClass} opacity-90` }, formatProviderName(provider)),
+        React.createElement('span', { className: 'ml-2 font-medium opacity-90' }, basePart),
+        React.createElement('span', { className: 'ml-2 text-pink-400 font-medium opacity-90 italic' }, 'free')
+      );
+    }
+
+    return React.createElement(
+      'div',
+      { className: 'flex items-center' },
+      React.createElement('span', { className: `font-medium ${colorClass} opacity-90` }, formatProviderName(provider)),
+      React.createElement('span', { className: 'ml-2 font-medium opacity-90' }, modelPart)
+    );
+  }
+
+  return modelName;
 };

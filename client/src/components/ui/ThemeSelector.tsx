@@ -20,7 +20,7 @@ const Theme = ({ theme, onChange }: { theme: string; onChange: (value: string) =
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 't') {
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'l') {
         e.preventDefault();
         onChange(nextTheme);
       }
@@ -33,7 +33,7 @@ const Theme = ({ theme, onChange }: { theme: string; onChange: (value: string) =
     <button
       className="flex items-center gap-2 rounded-lg p-2 transition-colors hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
       aria-label={label}
-      aria-keyshortcuts="Ctrl+Shift+T"
+      aria-keyshortcuts="Ctrl+Shift+L"
       onClick={(e) => {
         e.preventDefault();
         onChange(nextTheme);

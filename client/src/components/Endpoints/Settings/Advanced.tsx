@@ -121,7 +121,7 @@ export default function Settings({
               <Label htmlFor="temp-int" className="text-left text-sm font-medium">
                 {localize('com_endpoint_temperature')}{' '}
                 <small className="opacity-40">
-                  ({localize('com_endpoint_default_with_num', { 0: '1' })})
+                  ({localize('com_endpoint_default_with_num', { 0: '0.5' })})
                 </small>
               </Label>
               <InputNumber
@@ -144,9 +144,9 @@ export default function Settings({
             </div>
             <Slider
               disabled={readonly}
-              value={[(temperatureValue as number) ?? 1]}
+              value={[(temperatureValue as number) ?? 0.5]}
               onValueChange={(value) => setTemperature(value[0])}
-              onDoubleClick={() => setTemperature(1)}
+              onDoubleClick={() => setTemperature(0.5)}
               max={2}
               min={0}
               step={0.01}
@@ -273,12 +273,14 @@ export default function Settings({
         </HoverCard>
         <div className="w-full">
           <div className="mb-2 flex w-full justify-between gap-2">
-            <label
-              htmlFor="resend-files"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 dark:text-gray-50"
-            >
-              <small>{localize('com_endpoint_plug_resend_files')}</small>
-            </label>
+            {false && (
+            // <label
+            //   htmlFor="resend-files"
+            //   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 dark:text-gray-50"
+            // >
+              {/* <small>{localize('com_endpoint_plug_resend_files')}</small> */}
+            // </label>
+            )}
             <label
               htmlFor="image-detail-value"
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 dark:text-gray-50"
@@ -298,11 +300,12 @@ export default function Settings({
             />
           </div>
           <div className="flex w-full justify-between gap-2">
+            {false && (
             <HoverCard openDelay={500}>
               <HoverCardTrigger>
                 <Switch
                   id="resend-files"
-                  checked={resendFiles ?? true}
+                  checked={resendFiles ?? false}
                   onCheckedChange={(checked: boolean) => setResendFiles(checked)}
                   disabled={readonly}
                   className="flex"
@@ -310,8 +313,9 @@ export default function Settings({
                 <OptionHover endpoint={optionEndpoint ?? ''} type="resend" side={ESide.Bottom} />
               </HoverCardTrigger>
             </HoverCard>
+            )}
             <HoverCard openDelay={500}>
-              <HoverCardTrigger className="flex w-[52%] md:w-[125px]">
+              <HoverCardTrigger className="flex w-[62%] md:w-[15px]">
                 <Slider
                   id="image-detail-slider"
                   disabled={readonly}

@@ -1,0 +1,373 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* CSS variables moved here for backward compatibility */
+  :root {
+    /* base tokens */
+    --white: 255 255 255;
+    --black: 0 0 0;
+    /* Dark mode is now the default (inverted) */
+    --neutral-50: 249 250 251;
+    --neutral-100: 243 244 246;
+    --neutral-200: 229 231 235;
+    --neutral-300: 209 213 219;
+    --neutral-400: 156 163 175;
+    --neutral-500: 107 114 128;
+    --neutral-600: 75 85 99;
+    --neutral-700: 55 65 81;
+    --neutral-800: 31 41 55;
+    --neutral-900: 17 24 39;
+
+    --accent-500: 121 133 157;
+    --accent-600: 10 141 255;
+    --accent-800: 95 96 173;
+    --accent-900: 75 76 153;
+
+    --warning-50: 254 243 199;
+    --warning-100: 253 230 138;
+    --warning-200: 252 211 77;
+    --warning-300: 251 191 36;
+    --warning-400: 254 151 15;
+    --warning-500: 252 127 3;
+    --warning-600: 217 72 15;
+    --warning-700: 180 35 24;
+    --warning-800: 147 22 33;
+    --warning-900: 127 24 40;
+
+    --success-500: 13 207 13;
+    --success-800: 34 197 94;
+
+    --red-50: 254 242 242;
+    --red-100: 254 226 226;
+    --red-200: 254 202 202;
+    --red-300: 252 165 165;
+    --red-400: 248 113 113;
+    --red-500: 239 68 68;
+    --red-600: 220 38 38;
+    --red-700: 185 28 28;
+    --red-800: 153 27 27;
+    --red-900: 127 29 29;
+
+    --yellow-50: 255 251 235;
+    --yellow-100: 254 243 199;
+    --yellow-200: 253 230 138;
+    --yellow-300: 252 211 77;
+    --yellow-400: 251 191 36;
+    --yellow-500: 245 158 11;
+    --yellow-600: 217 119 6;
+    --yellow-700: 180 83 9;
+    --yellow-800: 146 64 14;
+    --yellow-900: 120 53 15;
+
+    --green-50: 240 253 244;
+    --green-100: 220 252 231;
+    --green-200: 187 247 208;
+    --green-300: 134 239 172;
+    --green-400: 74 222 128;
+    --green-500: 34 197 94;
+    --green-600: 22 163 74;
+    --green-700: 21 128 61;
+    --green-800: 22 101 52;
+    --green-900: 20 83 45;
+
+    --zinc-50: 250 250 250;
+    --zinc-100: 244 244 245;
+    --zinc-200: 228 228 231;
+    --zinc-300: 212 212 216;
+    --zinc-400: 161 161 170;
+    --zinc-500: 113 113 122;
+    --zinc-600: 82 82 91;
+    --zinc-700: 63 63 70;
+    --zinc-800: 39 39 42;
+    --zinc-900: 24 24 27;
+    --zinc-950: 9 9 11;
+
+    --stone-50: 250 250 249;
+    --stone-100: 245 245 244;
+    --stone-200: 231 229 228;
+    --stone-300: 214 211 209;
+    --stone-400: 168 162 158;
+    --stone-500: 120 113 108;
+    --stone-600: 87 83 78;
+    --stone-700: 68 64 60;
+    --stone-800: 41 37 36;
+    --stone-900: 28 25 23;
+    --stone-950: 12 10 9;
+
+    --sky-50: 240 249 255;
+    --sky-100: 224 242 254;
+    --sky-200: 186 230 253;
+    --sky-300: 125 211 252;
+    --sky-400: 56 189 248;
+    --sky-500: 14 165 233;
+    --sky-600: 2 132 199;
+    --sky-700: 3 105 161;
+    --sky-800: 7 89 133;
+    --sky-900: 12 74 110;
+    --sky-950: 8 47 73;
+
+    --indigo-900: 31 44 93;
+    --indigo-950: 23 32 69;
+
+    /* semantic tokens */
+    --background: var(--neutral-50);
+    --background-alt: 242 242 242;
+    --background-item: 255 255 255;
+    --foreground: var(--neutral-800);
+    --foreground-secondary: 103 103 103;
+    --foreground-input: var(--foreground);
+    --foreground-inverted: var(--background);
+    --foreground-alt: 23 37 84;
+    --success: 0 176 80;
+
+    --muted: var(--neutral-50);
+    --muted-fg: var(--neutral-400);
+
+    --accent: var(--accent-800);
+    --accent-fg: var(--neutral-50);
+
+    --destructive: var(--red-500);
+    --destructive-fg: var(--neutral-50);
+
+    --border: var(--neutral-200);
+    --ring: var(--accent-500);
+
+    --radius: 0.5rem;
+
+    /* component colors */
+    --primary: var(--accent);
+    --primary-fg: var(--accent-fg);
+    --secondary: var(--neutral-100);
+    --secondary-fg: var(--accent-800);
+
+    --active: var(--neutral-200);
+    --active-fg: var(--accent-900);
+
+    --active-alt: var(--neutral-100);
+    --active-alt-fg: var(--accent-900);
+
+    --surface: 255 255 255;
+    --surface-fg: var(--foreground);
+
+    --surface-primary: var(--neutral-100);
+    --surface-primary-fg: var(--neutral-900);
+
+    --surface-primary-alt: var(--background);
+    --surface-primary-alt-fg: var(--foreground);
+
+    --surface-secondary: var(--neutral-100);
+    --surface-secondary-fg: var(--neutral-900);
+
+    --surface-secondary-alt: var(--neutral-200);
+    --surface-secondary-alt-fg: var(--neutral-900);
+
+    --surface-accent: var(--accent-500);
+    --surface-accent-fg: var(--accent-fg);
+
+    --surface-accent-alt: var(--accent-600);
+    --surface-accent-alt-fg: var(--accent-fg);
+
+    --surface-destructive: var(--red-800);
+    --surface-destructive-fg: var(--accent-fg);
+
+    --surface-warning: var(--yellow-600);
+    --surface-warning-fg: var(--accent-fg);
+
+    --surface-success: var(--success-800);
+    --surface-success-fg: var(--accent-fg);
+
+    --surface-active: var(--accent-600);
+    --surface-active-fg: var(--accent-fg);
+
+    --surface-active-alt: var(--accent-500);
+    --surface-active-alt-fg: var(--accent-fg);
+
+    --popover: 255 255 255;
+    --popover-fg: var(--foreground);
+
+    --card: 255 255 255;
+    --card-fg: var(--foreground);
+
+    --link: var(--accent);
+    --placeholder: 170 170 170;
+
+    --nav-bg: 9 9 11;
+    --nav-fg: 228 228 231;
+    --scrollbar-bg: 218 218 218;
+    --scrollbar-fg: 176 176 176;
+    --code-bg: 248 249 250;
+
+    --input: var(--background-alt);
+    --button-card-bg: var(--background-item);
+    --button-card-fg: var(--foreground-secondary);
+    --thin-border: var(--border);
+  }
+
+  .dark {
+    /* base tokens */
+    /* Light mode reversed */
+    --accent-500: 103 116 142;
+    --accent-600: 0 122 255;
+    --accent-800: 95 96 173;
+    --accent-900: 75 76 153;
+
+    --background: var(--neutral-900);
+    --background-alt: 20 20 20;
+    --background-item: 35 35 35;
+    --foreground: var(--neutral-100);
+    --foreground-secondary: 150 150 150;
+    --foreground-input: var(--foreground);
+    --foreground-inverted: var(--background);
+
+    --code-bg: 36 42 55;
+
+    --active: var(--neutral-700);
+    --active-fg: var(--accent-600);
+
+    --active-alt: var(--neutral-800);
+    --active-alt-fg: var(--accent-600);
+
+    --surface: var(--neutral-950);
+    --surface-fg: var(--foreground);
+
+    --surface-primary: var(--neutral-800);
+    --surface-primary-fg: var(--neutral-100);
+
+    --surface-primary-alt: var(--neutral-700);
+    --surface-primary-alt-fg: var(--neutral-100);
+
+    --surface-secondary: var(--neutral-800);
+    --surface-secondary-fg: var(--neutral-100);
+
+    --surface-secondary-alt: var(--neutral-700);
+    --surface-secondary-alt-fg: var(--neutral-100);
+
+    --surface-destructive: var(--red-400);
+    --surface-warning: var(--yellow-400);
+
+    --nav-bg: 24 24 27;
+    --nav-fg: 229 231 235;
+    --scrollbar-bg: 36 36 36;
+    --scrollbar-fg: 67 67 67;
+
+    --input: var(--background-alt);
+    --button-card-bg: var(--background-item);
+    --button-card-fg: var(--foreground-secondary);
+    --thin-border: var(--neutral-800);
+  }
+
+  html {
+    box-sizing: border-box;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+      Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+      'Noto Color Emoji';
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+
+  body {
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+      'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* :root {
+  } */
+
+  body.no-scroll {
+    overflow: hidden;
+  }
+
+  body > #root {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: rgb(var(--foreground-alt));
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-feature-settings: normal;
+  }
+
+  input,
+  select,
+  textarea {
+    color: rgb(var(--foreground-input));
+  }
+
+  a {
+    color: rgb(var(--link));
+  }
+
+  /* Text area scrollbar override for dark-mode */
+  body.dark textarea::-webkit-scrollbar-thumb {
+    background-color: rgb(var(--scrollbar-fg));
+  }
+
+  body.dark textarea::-webkit-scrollbar {
+    background-color: rgb(var(--scrollbar-bg));
+    width: 10px;
+  }
+
+  textarea:disabled {
+    resize: none;
+  }
+
+  /* this class is applied during markdown conversion,
+  and we want to preserve new lines then */
+  .whitespace-pre-wrap {
+    white-space: pre-wrap;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+@layer utilities {
+  .animate-pulse-border {
+    @apply border border-accent-600 shadow-[0_0_10px_0_rgba(0,122,255,0.5)];
+    animation: pulseBorder 1.5s infinite;
+  }
+
+  @keyframes pulseBorder {
+    0% {
+      border-color: rgb(var(--accent-600));
+      box-shadow: 0 0 5px 0 rgba(var(--accent-600), 0.3);
+    }
+    50% {
+      border-color: rgba(var(--accent-600), 0.5);
+      box-shadow: 0 0 15px 0 rgba(var(--accent-600), 0.6);
+    }
+    100% {
+      border-color: rgb(var(--accent-600));
+      box-shadow: 0 0 5px 0 rgba(var(--accent-600), 0.3);
+    }
+  }
+} 
