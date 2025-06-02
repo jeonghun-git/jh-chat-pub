@@ -1,12 +1,11 @@
 import { useMemo, useCallback } from 'react';
 import { OptionTypes } from 'librechat-data-provider';
 import type { DynamicSettingProps } from 'librechat-data-provider';
-import { Label, Slider, HoverCard, Input, InputNumber, HoverCardTrigger } from '~/components/ui';
+import { Label, Slider, Input, InputNumber } from '~/components/ui';
 import { useLocalize, useDebouncedInput, useParameterEffects, TranslationKeys } from '~/hooks';
 import { cn, defaultTextProps, optionText } from '~/utils';
-import { ESide, defaultDebouncedDelay } from '~/common';
+import { defaultDebouncedDelay } from '~/common';
 import { useChatContext } from '~/Providers';
-import OptionHover from './OptionHover';
 
 function DynamicSlider({
   label = '',
@@ -110,77 +109,69 @@ function DynamicSlider({
         columnSpan != null ? `col-span-${columnSpan}` : 'col-span-full',
       )}
     >
-      <HoverCard openDelay={300}>
-        <HoverCardTrigger className="grid w-full items-center gap-2">
-          <div className="flex w-full items-center justify-between">
-            <Label
-              htmlFor={`${settingKey}-dynamic-setting`}
-              className="text-left text-sm font-medium"
-            >
-              {labelCode ? localize(label as TranslationKeys) ?? label : label || settingKey}{' '}
-              {showDefault && (
-                <small className="opacity-40">
-                  ({localize('com_endpoint_default')}: {defaultValue})
-                </small>
-              )}
-            </Label>
-            {includeInput && !isEnum ? (
-              <InputNumber
-                id={`${settingKey}-dynamic-setting-input-number`}
-                disabled={readonly}
-                value={inputValue ?? defaultValue}
-                onChange={(value) => setInputValue(Number(value))}
-                max={range ? range.max : (options?.length ?? 0) - 1}
-                min={range ? range.min : 0}
-                step={range ? range.step ?? 1 : 1}
-                controls={false}
-                className={cn(
-                  defaultTextProps,
-                  cn(
-                    optionText,
-                    'reset-rc-number-input reset-rc-number-input-text-right h-auto w-12 border-0 group-hover/temp:border-gray-200',
-                  ),
-                )}
-              />
-            ) : (
-              <Input
-                id={`${settingKey}-dynamic-setting-input`}
-                disabled={readonly}
-                value={selectedValue ?? defaultValue}
-                onChange={() => ({})}
-                className={cn(
-                  defaultTextProps,
-                  cn(
-                    optionText,
-                    'reset-rc-number-input reset-rc-number-input-text-right h-auto w-12 border-0 group-hover/temp:border-gray-200',
-                  ),
-                )}
-              />
+      <div className="grid w-full items-center gap-2">
+        <div className="flex w-full items-center justify-between">
+          <Label
+            htmlFor={`${settingKey}-dynamic-setting`}
+            className="text-left text-sm font-medium"
+          >
+            {labelCode ? localize(label as TranslationKeys) ?? label : label || settingKey}{' '}
+            {showDefault && (
+              <small className="opacity-40">
+                ({localize('com_endpoint_default')}: {defaultValue})
+              </small>
             )}
-          </div>
-          <Slider
-            id={`${settingKey}-dynamic-setting-slider`}
-            disabled={readonly}
-            value={[
-              isEnum
-                ? enumToNumeric[(selectedValue as number) ?? '']
-                : (inputValue as number) ?? (defaultValue as number),
-            ]}
-            onValueChange={(value) => handleValueChange(value[0])}
-            onDoubleClick={() => setInputValue(defaultValue as string | number)}
-            max={max}
-            min={range ? range.min : 0}
-            step={range ? range.step ?? 1 : 1}
-            className="flex h-4 w-full"
-          />
-        </HoverCardTrigger>
-        {description && (
-          <OptionHover
-            description={descriptionCode ? localize(description as TranslationKeys) ?? description : description}
-            side={ESide.Left}
-          />
-        )}
-      </HoverCard>
+          </Label>
+          {includeInput && !isEnum ? (
+            <InputNumber
+              id={`${settingKey}-dynamic-setting-input-number`}
+              disabled={readonly}
+              value={inputValue ?? defaultValue}
+              onChange={(value) => setInputValue(Number(value))}
+              max={range ? range.max : (options?.length ?? 0) - 1}
+              min={range ? range.min : 0}
+              step={range ? range.step ?? 1 : 1}
+              controls={false}
+              className={cn(
+                defaultTextProps,
+                cn(
+                  optionText,
+                  'reset-rc-number-input reset-rc-number-input-text-right h-auto w-12 border-0 group-hover/temp:border-gray-200',
+                ),
+              )}
+            />
+          ) : (
+            <Input
+              id={`${settingKey}-dynamic-setting-input`}
+              disabled={readonly}
+              value={selectedValue ?? defaultValue}
+              onChange={() => ({})}
+              className={cn(
+                defaultTextProps,
+                cn(
+                  optionText,
+                  'reset-rc-number-input reset-rc-number-input-text-right h-auto w-12 border-0 group-hover/temp:border-gray-200',
+                ),
+              )}
+            />
+          )}
+        </div>
+        <Slider
+          id={`${settingKey}-dynamic-setting-slider`}
+          disabled={readonly}
+          value={[
+            isEnum
+              ? enumToNumeric[(selectedValue as number) ?? '']
+              : (inputValue as number) ?? (defaultValue as number),
+          ]}
+          onValueChange={(value) => handleValueChange(value[0])}
+          onDoubleClick={() => setInputValue(defaultValue as string | number)}
+          max={max}
+          min={range ? range.min : 0}
+          step={range ? range.step ?? 1 : 1}
+          className="flex h-4 w-full"
+        />
+      </div>
     </div>
   );
 }
