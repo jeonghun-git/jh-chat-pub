@@ -1,0 +1,200 @@
+# For more information, see the Configuration Guide:
+# https://www.librechat.ai/docs/configuration/librechat_yaml
+
+# Configuration version (required)
+version: 1.2.1
+
+# Cache settings: Set to true to enable caching
+cache: true
+  
+# File strategy s3/firebase
+# fileStrategy: "s3"
+
+# Custom interface configuration
+interface:
+  # customWelcome: "jh-chat"
+  # 초기 엔드포인트 및 모델 설정
+  startupEndpoint: 'OpenRouter'
+  startupModel: 'deepseek/deepseek-chat-v3-0324:free'
+  
+  endpointsMenu: true
+  modelSelect: true
+  parameters: true
+  sidePanel: true
+  presets: true
+  prompts: true
+  bookmarks: true
+  multiConvo: true
+  agents: true
+
+registration:
+  socialLogins: ['github', 'google', 'discord', 'openid', 'facebook', 'apple']
+  # allowedDomains:
+  # - "gmail.com"
+
+
+# Example Balance settings
+# balance:
+#   enabled: false
+#   startBalance: 20000
+#   autoRefillEnabled: false
+#   refillIntervalValue: 30
+#   refillIntervalUnit: 'days'
+#   refillAmount: 10000
+
+speech:
+  speechTab:
+    conversationMode: true
+    advancedMode: false
+    textToSpeech:
+      engineTTS: "external"
+      voice: "785710be83fa472f869276be7e553465"
+      languageTTS: "ko"
+      automaticPlayback: true
+      playbackRate: 1.0
+      cacheTTS: true
+  tts:
+    fishAudio:
+      url: 'https://api.fish.audio/v1/tts'
+      apiKey: '435bfb2a5c3b4041b8bb305692c5200f'
+      model: 'speech-1.6'
+      voices: ['speech-1.6', 'ALL']
+      format: 'mp3'
+      mp3_bitrate: 128
+      chunk_length: 200
+      latency: 'normal'
+      normalize: true
+      # msgpackr 라이브러리가 설치되어 있으면 MessagePack 형식으로 요청이 전송됩니다.
+      # 그렇지 않은 경우 자동으로 JSON 형식으로 대체됩니다.
+      # 성능 향상을 위해 MessagePack 사용을 권장합니다.
+
+#
+#   stt:
+#     openai:
+#       url: ''
+#       apiKey: '${STT_API_KEY}'
+#       model: ''
+
+# rateLimits:
+#   fileUploads:
+#     ipMax: 100
+#     ipWindowInMinutes: 60  # Rate limit window for file uploads per IP
+#     userMax: 50
+#     userWindowInMinutes: 60  # Rate limit window for file uploads per user
+#   conversationsImport:
+#     ipMax: 100
+#     ipWindowInMinutes: 60  # Rate limit window for conversation imports per IP
+#     userMax: 50
+#     userWindowInMinutes: 60  # Rate limit window for conversation imports per user
+
+# Example Actions Object Structure
+actions:
+  allowedDomains:
+    - "swapi.dev"
+    - "librechat.ai"
+    - "google.com"
+
+# MCP Servers Configuration - Added for agent tools integration
+mcpServers: {}
+
+
+  # mem0-memory: # mem0 메모리 MCP 서버 - 일시적으로 비활성화
+  #   type: "sse" # 통신 타입을 SSE로 설정
+  #   url: "https://mem0.ai/api/v1/mcp"
+  #   headers:
+  #     Authorization: "Bearer e473319a-d18e-4954-889a-634bf44eadc5"
+  #     "X-Mem0-Profile": "exciting-hawk-FUOrTM"
+  #     "X-Mem0-Client": "cursor"
+      
+# Definition of custom endpoints
+endpoints:
+  agents:
+    # (optional) Default recursion depth for agents, defaults to 25
+    recursionLimit: 50
+    # (optional) Max recursion depth for agents, defaults to 25
+    maxRecursionLimit: 100
+    # (optional) Disable the builder interface for agents
+    disableBuilder: false
+    capabilities:
+      - "execute_code"
+      - "file_search"
+      - "actions"
+      - "tools"
+    
+  custom:
+    # OpenRouter Example
+    - name: 'OpenRouter'
+      apiKey: user_provided
+      baseURL: 'https://openrouter.ai/api/v1'
+      models:
+        default:
+          - deepseek/deepseek-r1-0528:free
+          - deepseek/deepseek-r1-0528
+          - deepseek/deepseek-chat-v3-0324:free
+          - deepseek/deepseek-chat-v3-0324
+          - google/gemini-2.5-pro-preview
+          - google/gemini-2.5-flash-preview-05-20
+          - google/gemini-2.5-flash-preview-05-20:thinking
+          - google/gemini-2.0-flash-exp:free
+          - google/gemini-2.5-pro-exp-03-25
+          - openai/o4-mini-high
+          - openai/o4-mini
+          - openai/gpt-4.1-nano
+          - openai/gpt-4.1-mini
+          - openai/gpt-4.1
+          - qwen/qwen3-235b-a22b
+          - thudm/glm-z1-32b:free
+          - meta-llama/llama-4-maverick
+          - meta-llama/llama-4-maverick:free
+          - meta-llama/llama-4-scout:free
+          - anthropic/claude-3.7-sonnet:beta
+          - anthropic/claude-3.7-sonnet
+      fetch: true
+      titleConvo: true
+      titleModel: 'openai/gpt-4.1-mini'
+      titleBaseURL: 'https://openrouter.ai/api/v1'
+      visionModel: 'openai/gpt-4.1-mini'
+      titleMessageRole: 'user'
+      dropParams: ['stop']
+
+      
+      modelDisplayLabel: 'OpenRouter'
+
+    - name: 'LM Studio'
+      apiKey: 'dummy'
+      baseURL: 'http://182.218.49.58:9898/v1'
+      models:
+        default: ['model1']
+        fetch: true
+      titleConvo: true
+      titleModel: 'openai/gpt-4.1-mini'
+      titleBaseURL: 'https://openrouter.ai/api/v1'
+      titleMessageRole: 'user'
+      modelDisplayLabel: 'LM Studio'
+      dropParams: ['stop']
+      
+fileConfig:
+  endpoints:
+    assistants:
+      fileLimit: 5
+      fileSizeLimit: 100
+      totalSizeLimit: 500
+      supportedMimeTypes:
+        - "image/.*"
+        - "application/pdf"
+    
+    OpenRouter:
+      fileLimit: 5
+      fileSizeLimit: 100
+      totalSizeLimit: 500
+      supportedMimeTypes:
+        - "image/.*"
+        - "application/pdf"
+
+    default:
+      totalSizeLimit: 500
+    YourCustomEndpointName:
+      fileLimit: 5
+      fileSizeLimit: 50
+  serverFileSizeLimit: 100
+  avatarSizeLimit: 10
