@@ -453,7 +453,7 @@ export class MCPManager {
         this.updateUserLastActivity(userId);
       }
       this.checkIdleConnections();
-      return formatToolContent(result, provider);
+      return formatToolContent(result as any, provider);
     } catch (error) {
       // Log with context and re-throw or handle as needed
       this.logger.error(`${logPrefix}[${toolName}] Tool call failed`, error);
