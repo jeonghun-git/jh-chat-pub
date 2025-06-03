@@ -36,6 +36,7 @@ client/public/images/
 client/public/main.js
 client/public/main.js.map
 client/public/main.js.LICENSE.txt
+client/dist/
 
 # Azure Blob Storage Emulator (Azurite)
 __azurite**
@@ -46,6 +47,7 @@ __blobstorage__/**/*
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules/
 meili_data/
+meili_data_v1.12/
 api/node_modules/
 client/node_modules/
 bower_components/
@@ -57,7 +59,6 @@ bower_components/
 .floobit
 .floo
 .flooignore
-
 
 # Environment
 .npmrc
@@ -109,3 +110,46 @@ uploads/
 release/
 !/client/src/@types/i18next.d.ts
 .aider*
+
+[DEV-SPACE]/
+.cursor
+
+# Docker and runtime data directories
+data-node/
+nginx/logs/
+images/
+uploads/
+logs/
+
+# Certificate renewal script logs
+/var/log/letsencrypt-renew.log
+
+# Certificate renewal script
+# renew-cert.sh  # 개인용이므로 주석 처리
+
+# Backup directories
+# nginx-backup/  # 개인용이므로 주석 처리
+
+# IDE settings
+.vscode/
+
+# Development tools and generated files
+.dependency-cruiser.js
+.cursorignore
+dependency-graph.png
+dependency-graph.svg
+
+# Alternative package managers
+bun.lockb
+yarn.lock
+
+# Separate API servers
+main.py
+
+# Documentation files
+CHANGELOG.md
+
+# Configuration examples and temporary files
+rag.yml
+docker-compose.override.yml.example
+brave-search-fix.yaml

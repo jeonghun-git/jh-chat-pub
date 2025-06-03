@@ -4,11 +4,9 @@
 services:
   api:
     container_name: jh-chat
-    build:
-      context: .
-      dockerfile: Dockerfile.multi
+    image: librechat/librechat-dev:851938e7a68bc19ccdeeb0eb841a06717a73fc8a
     ports:
-      - '8080:8080'
+      - '8080:3080'
     depends_on:
       - rag_api
     restart: always
